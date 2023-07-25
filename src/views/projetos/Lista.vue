@@ -44,6 +44,8 @@
 import { computed, defineComponent } from 'vue';
 import { useStore } from "@/store";
 import { EXCLUIR_PROJETO } from '../../store/TipoDeMut';
+import { TipoNotificacao } from "@/interfaces/INotificacoes";
+import useNotificador from "@/Hooks/notificador";
 
 export default defineComponent({
   name: "ListaTracker",
@@ -55,13 +57,18 @@ export default defineComponent({
   methods: {
     excluir(id: string) {
       this.store.commit(EXCLUIR_PROJETO, id)
+      this.notificar(TipoNotificacao.FALHA, 'Excluido!', 'O projeto foi excluido !')
+
     }
   },
   setup() {
     const store = useStore()
+    const { notificar } = useNotificador()
+
     return {
       projetos: computed(() => store.state.projetos),
-      store
+      store,
+      notificar
     }
   }
 })
