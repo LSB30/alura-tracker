@@ -1,5 +1,5 @@
 <template>
-  <section >
+  <section>
     <form @submit.prevent="salvar">
       <div class="field">
         <label for="nomeDoProjeto" class="label">Nome Do Projeto</label>
@@ -18,6 +18,7 @@
 <script lang="ts">
 import { useStore } from "@/store";
 import { defineComponent } from 'vue';
+import { ADICIONA_PROJETO, ALTERA_PROJETO } from "../../store/TipoDeMut";
 
 export default defineComponent({
   name: "FormularioTracker",
@@ -40,12 +41,12 @@ export default defineComponent({
   methods: {
     salvar() {
       if (this.id) {
-        this.store.commit('ALTERA_PROJETO', {
+        this.store.commit(ALTERA_PROJETO, {
           id: this.id,
           nome: this.nomeDoProjeto
         })
       } else {
-        this.store.commit('ADICIONA_PROJETO', this.nomeDoProjeto)
+        this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto)
 
       }
       this.nomeDoProjeto = "";
