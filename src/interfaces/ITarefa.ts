@@ -1,6 +1,9 @@
+import IProjetos from "./IProjeto";
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export default interface ITarefa {
   duracaoEmSegundos: number,
-  descricao: string
+  descricao: string,
+  projeto: IProjetos
 
 }
